@@ -1,0 +1,36 @@
+.Wrapper {
+	--navMargin: 70px;
+	--navHeight: 60px;
+}
+
+.NavbarStyle {
+	height: var(--navHeight);
+}
+
+.MainStyle {
+	min-height: calc(100vh - var(--navHeight));
+}
+
+.Wrapper {
+	top: var(--navHeight);
+	background-position: center var(--navHeight);
+}
+
+.NavImageLabelCouple:hover .NavImage {
+	border: white solid 2px;
+}
+
+.NavImage {
+	height: var(--navHeight);
+	width: var(--navHeight);
+}
+
+@media (min-width: 768px) {
+	.MainStyle {
+		margin-top: var(--navMargin);
+		min-height: calc(100vh - var(--navHeight) - var(--navMargin));
+	}
+	.Wrapper {
+		background-position: right top var(--navHeight);
+	}
+}
