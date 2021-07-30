@@ -80,7 +80,11 @@ export default function character({ data }) {
 					}
 
 					return (
-						<div className='relative w-10 h-10' style={{ gridColumnStart: col, gridRowStart: row }}>
+						<div
+							key={col + row}
+							className='relative w-10 h-10'
+							style={{ gridColumnStart: col, gridRowStart: row }}
+						>
 							{item.icon ? (
 								<Image alt={`gear ${item.slot} icon`} src={item.glamIcon || item.icon} layout='fill' />
 							) : (
