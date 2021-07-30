@@ -6,6 +6,30 @@ import styles from '../../styles/character.module.css';
 export default function character({ data }) {
 	console.log(data);
 
+	// data does not include offhand
+	const gearSlots = [
+		'Head',
+		'Body',
+		'Hands',
+		'Waist',
+		'Legs',
+		'Feet',
+		'MainHand',
+		'OffHand',
+		'Earrings',
+		'Necklace',
+		'Bracelets',
+		'Ring1',
+		'Ring2',
+		'SoulCrystal'
+	];
+
+	const gear = [];
+
+	gearSlots.forEach((slot, index) => {
+		gear[index] = { slot, icon: data.gear[slot], glamIcon: data.glams[slot] };
+	});
+
 	return (
 		<div>
 			{/* Display the Navbar with Home button as well as portrait and name of character which links to the current page */}
@@ -41,24 +65,30 @@ export default function character({ data }) {
 				{data.character.ActiveClassJob.UnlockedState.Name}
 			</p>
 
-			<div className='grid place-items-center'>
+			<div className='grid grid-cols-3 place-items-center'>
 				<div className={'col-start-2 ' + styles.Avatar}>
 					<Image alt='player avatar' src={data.character.Portrait} width='640px' height='873px' />
 				</div>
-				<div className='col-start-1 row-start-1'>Head</div>
-				<div className='col-start-1 row-start-2'>Body</div>
-				<div className='col-start-1 row-start-3'>Head</div>
-				<div className='col-start-1 row-start-4'>Body</div>
-				<div className='col-start-1 row-start-5'>Head</div>
-				<div className='col-start-1 row-start-6'>Body</div>
-				<div className='col-start-1 row-start-7'>Body</div>
-				<div className='col-start-3 row-start-1'>Head</div>
-				<div className='col-start-3 row-start-2'>Body</div>
-				<div className='col-start-3 row-start-3'>Head</div>
-				<div className='col-start-3 row-start-4'>Body</div>
-				<div className='col-start-3 row-start-5'>Head</div>
-				<div className='col-start-3 row-start-6'>Body</div>
-				<div className='col-start-3 row-start-7'>Body</div>
+
+				{gear.map((item, index) => {
+					let col = 1;
+					let row = index + 1;
+
+					if (index > 6) {
+						col = 3;
+						row = row - 7;
+					}
+
+					return (
+						<div className='relative w-10 h-10' style={{ gridColumnStart: col, gridRowStart: row }}>
+							{item.icon ? (
+								<Image alt={`gear ${item.slot} icon`} src={item.glamIcon || item.icon} layout='fill' />
+							) : (
+								<div />
+							)}
+						</div>
+					);
+				})}
 			</div>
 
 			<h4>Nameday: {data.character.Nameday}</h4>
@@ -112,6 +142,9 @@ export async function getServerSideProps(context) {
 			let dataGCRank = {};
 			let dataFC = {};
 			let fcRank = [];
+			const gearSlots = Object.keys(dataChar.Character.GearSet.Gear);
+			const gear = {};
+			const glams = {};
 
 			if (dataChar.Character.GrandCompany) {
 				if (dataChar.Character.GrandCompany.NameID === 1) {
@@ -158,6 +191,29 @@ export async function getServerSideProps(context) {
 				];
 			}
 
+			for (const slot in gearSlots) {
+				const resItem = await fetch(
+					`https://xivapi.com/Item/${dataChar.Character.GearSet.Gear[gearSlots[slot]].ID}`
+				);
+				const dataItem = await resItem.json();
+				const itemIcon = 'https://xivapi.com' + dataItem.Icon;
+
+				const itemSlotKey = gearSlots[slot];
+				gear[itemSlotKey] = itemIcon;
+
+				let glamIcon = null;
+
+				if (dataChar.Character.GearSet.Gear[gearSlots[slot]].Mirage) {
+					const resGlam = await fetch(
+						`https://xivapi.com/Item/${dataChar.Character.GearSet.Gear[gearSlots[slot]].Mirage}`
+					);
+					const dataGlam = await resGlam.json();
+					glamIcon = 'https://xivapi.com' + dataGlam.Icon;
+				}
+				const glamSlotKey = gearSlots[slot];
+				glams[glamSlotKey] = glamIcon;
+			}
+
 			return {
 				props : {
 					data : {
@@ -172,7 +228,9 @@ export async function getServerSideProps(context) {
 						grandCompanyRank   : dataGCRank.Name,
 						grandCompanyBanner,
 						freeCompanyBanner  : dataFC.FreeCompany.Crest,
-						freeCompanyRank    : { name: fcRank[0].Rank, icon: fcRank[0].RankIcon }
+						freeCompanyRank    : { name: fcRank[0].Rank, icon: fcRank[0].RankIcon },
+						gear,
+						glams
 					}
 				}
 			};

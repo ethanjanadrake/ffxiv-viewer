@@ -2,8 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function CompanyHeader(props) {
-	console.log(props);
-
 	let styleClasses = {
 		full                   : '',
 		innerLink              : '',
