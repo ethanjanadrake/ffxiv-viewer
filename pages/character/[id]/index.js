@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Nav from '../../../components/Nav';
 import CharacterTitleSection from '../../../components/CharacterTitleSection';
 import CharacterClassSection from '../../../components/CharacterClassSection';

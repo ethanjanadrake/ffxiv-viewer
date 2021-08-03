@@ -52,6 +52,7 @@ export default function equipment({ data }) {
 				name={data.character.Name}
 				dataCenter={data.character.DC}
 				server={data.character.Server}
+				grandCompany={{}}
 			/>
 
 			<div className='grid grid-cols-3 place-items-center'>
@@ -70,7 +71,7 @@ export default function equipment({ data }) {
 
 					return (
 						<div
-							key={col + row}
+							key={index}
 							className='relative w-10 h-10'
 							style={{ gridColumnStart: col, gridRowStart: row }}
 						>
