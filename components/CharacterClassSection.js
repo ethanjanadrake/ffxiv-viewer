@@ -2,33 +2,32 @@ import Image from 'next/image';
 
 export default function CharacterClassSection(props) {
 	const classArray = [];
-	console.log(props);
 
-	classArray.push({ icon: '/../public/images/Role_Tank.png', roleLabel: 'Tank' });
+	classArray.push({ icon: '/images/Role_Tank.png', roleLabel: 'Tank' });
 	for (let i = 0; i < 4; i++) {
 		classArray.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/../public/images/Role_Healer.png', roleLabel: 'Healer' });
+	classArray.push({ icon: '/images/Role_Healer.png', roleLabel: 'Healer' });
 	for (let i = 8; i < 11; i++) {
 		classArray.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/../public/images/Role_Melee_DPS.png', roleLabel: 'Melee DPS' });
+	classArray.push({ icon: '/images/Role_Melee_DPS.png', roleLabel: 'Melee DPS' });
 	for (let i = 4; i < 8; i++) {
 		classArray.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/../public/images/Role_Physical_Ranged_DPS.png', roleLabel: 'Physical Ranged DPS' });
+	classArray.push({ icon: '/images/Role_Physical_Ranged_DPS.png', roleLabel: 'Physical Ranged DPS' });
 	for (let i = 11; i < 14; i++) {
 		classArray.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/../public/images/Role_Magical_Ranged_DPS.png', roleLabel: 'Magical Ranged DPS' });
+	classArray.push({ icon: '/images/Role_Magical_Ranged_DPS.png', roleLabel: 'Magical Ranged DPS' });
 	for (let i = 14; i < 18; i++) {
 		classArray.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/../public/images/Role_Disciples_of_the_Hand.png', roleLabel: 'Disciples of the Hand' });
+	classArray.push({ icon: '/images/Role_Disciples_of_the_Hand.png', roleLabel: 'Disciples of the Hand' });
 	for (let i = 18; i < 26; i++) {
 		classArray.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/../public/images/Role_Disciples_of_the_Land.png', roleLabel: 'Disciples of the Land' });
+	classArray.push({ icon: '/images/Role_Disciples_of_the_Land.png', roleLabel: 'Disciples of the Land' });
 	for (let i = 26; i < 29; i++) {
 		classArray.push(props.classes[i]);
 	}
@@ -37,7 +36,7 @@ export default function CharacterClassSection(props) {
 
 	classArray.forEach((classJob) => {
 		if (classJob.JobID) {
-			classJob.icon = '/../public/images/' + classJob.UnlockedState.Name.split(' ').join('_') + '_Icon.png';
+			classJob.icon = '/images/' + classJob.UnlockedState.Name.split(' ').join('_') + '_Icon.png';
 		}
 	});
 
