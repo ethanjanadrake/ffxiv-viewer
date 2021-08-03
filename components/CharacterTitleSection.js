@@ -38,7 +38,7 @@ export default function CharacterTitleSection(props) {
 				<div />
 			)}
 
-			{props.grandCompany ? (
+			{props.grandCompany.name ? (
 				<div className='col-start-1 row-start-3 md:row-start-1 md:col-start-3 h-full flex flex-col justify-end'>
 					<Link href={`../${props.grandCompany.name.split(' ').join('')}`}>
 						<a>
@@ -48,7 +48,12 @@ export default function CharacterTitleSection(props) {
 								</label>
 								<div className='absolute' style={{ top: '-50px', right: '-50px' }}>
 									<div className='relative w-24 h-24'>
-										<Image src={props.grandCompany.banner} layout='fill' objectFit='contain' />
+										<Image
+											alt='grand company banner'
+											src={props.grandCompany.banner}
+											layout='fill'
+											objectFit='contain'
+										/>
 									</div>
 								</div>
 							</div>

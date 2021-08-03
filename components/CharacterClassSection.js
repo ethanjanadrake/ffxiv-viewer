@@ -36,7 +36,7 @@ export default function CharacterClassSection(props) {
 	classArray[22].UnlockedState.Name = 'Blue Mage';
 
 	classArray.forEach((classJob) => {
-		if (classJob.ClassID) {
+		if (classJob.JobID) {
 			classJob.icon = '/../public/images/' + classJob.UnlockedState.Name.split(' ').join('_') + '_Icon.png';
 		}
 	});
@@ -49,6 +49,7 @@ export default function CharacterClassSection(props) {
 				let col = 1;
 				const progress = Math.floor(job.ExpLevel / job.ExpLevelMax * 100) + '%';
 				let levelColor = 'text-white';
+				let opacity = '';
 
 				if (job.Level === 80) {
 					levelColor = 'text-yellow-400';
@@ -65,8 +66,12 @@ export default function CharacterClassSection(props) {
 					col = 4;
 				}
 
+				if (job.Level === 0) {
+					opacity = 'opacity-40';
+				}
+
 				return (
-					<div key={job.icon} style={{ gridColumnStart: col }} className='w-48'>
+					<div key={job.icon} style={{ gridColumnStart: col }} className={'w-48 ' + opacity}>
 						{job.JobID ? (
 							<div className='flex items-center p-1 relative'>
 								<div className='w-8 h-8 relative'>
