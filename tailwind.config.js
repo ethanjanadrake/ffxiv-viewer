@@ -6,11 +6,25 @@ module.exports = {
 	],
 	darkMode : false, // or 'media' or 'class'
 	theme    : {
-		extend : {
+		extend     : {
 			backgroundImage : (theme) => ({
 				'background-image'       : "url('/images/bg-endwalker.jpg')",
 				'background-image-small' : "url('/images/bg-endwalker-small.jpg')"
 			})
+		},
+		fontFamily : {
+			roboto   : [
+				'"Roboto Condensed"',
+				'sans-serif'
+			],
+			medula   : [
+				'"Medula One"',
+				'sans-serif'
+			],
+			almendra : [
+				'Almendra',
+				'sans-serif'
+			]
 		}
 	},
 	variants : {

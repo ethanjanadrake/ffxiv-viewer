@@ -5,7 +5,9 @@ module.exports = {
 			'img2.finalfantasyxiv.com',
 			'img.finalfantasyxiv.com',
 			'xivapi.com',
-			'static.wikia.nocookie.net'
+			'static.wikia.nocookie.net',
+			'wikia.nocookie.net',
+			'nocookie.net'
 		]
 	},
 	env             : {

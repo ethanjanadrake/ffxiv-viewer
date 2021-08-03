@@ -13,7 +13,7 @@ export default function Nav(props) {
 							(props.current ? 'bg-white text-black' : 'hover:bg-white hover:text-black')
 						}
 					>
-						<li className='text-lg font-medium'>Home</li>
+						<li className='text-2xl font-medium font-medula'>Home</li>
 					</a>
 				</Link>
 				{props.linkList.map((navLink) => {
@@ -26,7 +26,7 @@ export default function Nav(props) {
 									(navLink.image ? '' : 'px-4 ')
 								}
 							>
-								<li className='text-lg font-medium'>
+								<li className='text-2xl font-medula font-medium'>
 									{navLink.image ? (
 										<div className={'flex items-center pr-4 ' + styles.NavImageLabelCouple}>
 											<div
