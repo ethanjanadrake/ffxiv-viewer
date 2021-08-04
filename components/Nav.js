@@ -9,12 +9,19 @@ export default function Nav(props) {
 		setPullout
 	] = useState(false);
 
+	console.log(props);
+
 	let navClass = '';
 	let navOverlay = 'hidden';
+	let styleCurrent = '';
 
 	if (pullout) {
 		navClass = 'NavActive';
 		navOverlay = '';
+	}
+
+	if (props.current) {
+		styleCurrent = 'NavImageCurrent';
 	}
 
 	return (
@@ -59,8 +66,9 @@ export default function Nav(props) {
 											<div className={'flex items-center pr-4 ' + styles.NavImageLabelCouple}>
 												<div
 													className={
-														'transition-all relative mr-4 border-black border-2 hidden sm:block ' +
-														styles.NavImage
+														'transition-all relative mr-4 hidden sm:block border-2 border-solid ' +
+														styles.NavImage +
+														(navLink.current ? ' border-white' : ' border-black')
 													}
 												>
 													<Image alt={navLink.label} src={navLink.image} layout='fill' />
