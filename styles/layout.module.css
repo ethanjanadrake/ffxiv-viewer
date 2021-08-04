@@ -3,12 +3,21 @@
 	--navHeight: 60px;
 }
 
+.MainStyle {
+	min-height: calc(100vh - var(--navHeight));
+}
+
 .NavbarStyle {
 	height: var(--navHeight);
 }
 
-.MainStyle {
-	min-height: calc(100vh - var(--navHeight));
+.NavbarStyle ul {
+	flex-direction: column;
+	left: -100vw;
+}
+
+.NavbarStyle .NavActive {
+	left: 0;
 }
 
 .Wrapper {
@@ -32,5 +41,15 @@
 	}
 	.Wrapper {
 		background-position: right top var(--navHeight);
+	}
+}
+
+@media (min-width: 640px) {
+	.NavbarStyle ul {
+		height: var(--navHeight);
+		flex-direction: row;
+	}
+	.NavbarStyle button {
+		display: none;
 	}
 }

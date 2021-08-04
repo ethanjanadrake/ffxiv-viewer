@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import styles from '../styles/character.module.css';
 
 export default function CharacterClassSection(props) {
 	const classArray = [];
@@ -40,10 +41,8 @@ export default function CharacterClassSection(props) {
 		}
 	});
 
-	console.log(classArray);
-
 	return (
-		<div className='grid grid-cols-3 grid-flow-col bg-gray-600 w-9/12 max-w-4xl p-3 rounded-lg border-2 border-yellow-400 border-solid mx-auto'>
+		<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 grid-flow-col bg-gray-600 w-9/12 w-64 md:w-8/12 xl:w-9/12 p-3 rounded-lg border-2 border-yellow-400 border-solid mx-auto'>
 			{classArray.map((job, index) => {
 				let col = 1;
 				const progress = Math.floor(job.ExpLevel / job.ExpLevelMax * 100) + '%';
@@ -69,19 +68,23 @@ export default function CharacterClassSection(props) {
 					opacity = 'opacity-40';
 				}
 
+				const colString = 'Col' + col;
+
 				return (
-					<div key={job.icon} style={{ gridColumnStart: col }} className={'w-48 ' + opacity}>
+					<div key={job.icon} className={'w-48 mx-auto ' + opacity + ' ' + styles[colString]}>
 						{job.JobID ? (
-							<div className='flex items-center p-1 relative'>
-								<div className='w-8 h-8 relative'>
-									<Image alt={job.UnlockedState.Name} src={job.icon} layout='fill' />
+							<div className='flex items-center justify-between mx-4 p-1'>
+								<div className='flex items-center'>
+									<div className='w-8 h-8 relative mr-2'>
+										<Image alt={job.UnlockedState.Name} src={job.icon} layout='fill' />
+									</div>
+									<label className={'px-1 text-3xl font-medula ' + levelColor}>{job.Level}</label>
 								</div>
-								<label className={'px-1 text-3xl font-medula ' + levelColor}>{job.Level}</label>
-								<div className='absolute top-1 left-16'>
+								<div>
 									<label className='font-roboto text-white'>{job.UnlockedState.Name}</label>
-									<div className='h-1 relative w-20 overflow-hidden'>
-										<div className='w-full h-full bg-gray-500 absolute' />
-										<div className='h-full bg-gray-300 absolute' style={{ width: progress }} />
+									<div className='h-1 relative w-20 mb-1 overflow-hidden'>
+										<div className='w-full h-full bg-gray-500' />
+										<div className='h-full bg-gray-300' style={{ width: progress }} />
 									</div>
 								</div>
 							</div>
@@ -100,7 +103,7 @@ export default function CharacterClassSection(props) {
 					</div>
 				);
 			})}
-			<div className='w-11/12' style={{ gridColumnStart: '3', gridRow: '1 / 15' }}>
+			<div className={'w-11/12 ' + styles.PortraitSection}>
 				<p className='text-center font-medula text-xl text-gray-300'>
 					{props.tribe} {props.race}
 				</p>

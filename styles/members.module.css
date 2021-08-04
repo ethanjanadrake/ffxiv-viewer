@@ -1,0 +1,11 @@
+.MemberLink:hover .Avatar {
+	border: 2px solid #fb9e24;
+}
+
+.MemberLink:hover .Rank {
+	color: #edf2f7;
+}
+
+.MemberLink:hover .PlayerName {
+	color: #fb9e24;
+}

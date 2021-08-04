@@ -11,13 +11,18 @@ export default function character({ data }) {
 			<Nav
 				linkList={[
 					{
-						link  : `./${data.character.ID}`,
-						label : data.character.Name,
-						image : data.character.Avatar
+						link    : `/character/${data.character.ID}`,
+						label   : data.character.Name,
+						image   : data.character.Avatar,
+						current : true
 					},
 					{
-						link  : `./${data.character.ID}/equipment`,
+						link  : `/character/${data.character.ID}/equipment`,
 						label : 'Equipment'
+					},
+					{
+						link  : `/character/${data.character.ID}/glamours`,
+						label : 'Glamours'
 					}
 				]}
 			/>
@@ -51,8 +56,13 @@ export default function character({ data }) {
 
 export async function getServerSideProps(context) {
 	const fetcher = (url) => fetch(url).then((res) => res.json());
-	const dataChar = await fetcher(`https://xivapi.com/character/${context.params.id}`);
-	const classes = await fetcher('https://xivapi.com/classjob');
+	const dataChar = await fetcher(
+		`https://xivapi.com/character/${context.params
+			.id}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
+	);
+	const classes = await fetcher(
+		'https://xivapi.com/classjob?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1'
+	);
 
 	let charGender = 'Male';
 
@@ -67,10 +77,22 @@ export async function getServerSideProps(context) {
 			};
 		}
 		default:
-			const dataRace = await fetcher(`https://xivapi.com/Race/${dataChar.Character.Race}`);
-			const dataGuardian = await fetcher(`https://xivapi.com/GuardianDeity/${dataChar.Character.GuardianDeity}`);
-			const dataTribe = await fetcher(`https://xivapi.com/Tribe/${dataChar.Character.Tribe}`);
-			const dataTitle = await fetcher(`https://xivapi.com/Title/${dataChar.Character.Title}`);
+			const dataRace = await fetcher(
+				`https://xivapi.com/Race/${dataChar.Character
+					.Race}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
+			);
+			const dataGuardian = await fetcher(
+				`https://xivapi.com/GuardianDeity/${dataChar.Character
+					.GuardianDeity}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
+			);
+			const dataTribe = await fetcher(
+				`https://xivapi.com/Tribe/${dataChar.Character
+					.Tribe}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
+			);
+			const dataTitle = await fetcher(
+				`https://xivapi.com/Title/${dataChar.Character
+					.Title}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
+			);
 			let grandCompany = {};
 
 			if (dataChar.Character.GrandCompany) {

@@ -13,11 +13,11 @@ export default function CompanyHeader(props) {
 							})}
 						</div>
 
-						<h1 className='text-5xl font-bold'>{props.name}</h1>
+						<h1 className='text-5xl font-almendra font-bold'>{props.name}</h1>
 					</div>
 				</a>
 			</Link>
-			<h4 className='my-4 text-center text-lg font-bold text-blue-600'>
+			<h4 className='my-4 text-center text-lg font-bold text-blue-800'>
 				&lt;{props.dataCenter} - {props.server}&gt;
 			</h4>
 		</div>

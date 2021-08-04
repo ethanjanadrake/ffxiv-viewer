@@ -3,7 +3,7 @@ import Nav from '../../../components/Nav';
 import CharacterTitleSection from '../../../components/CharacterTitleSection';
 import styles from '../../../styles/character.module.css';
 
-export default function equipment({ data }) {
+export default function glamours({ data }) {
 	console.log(data);
 
 	// data does not include offhand
@@ -27,7 +27,7 @@ export default function equipment({ data }) {
 	const gear = [];
 
 	gearSlots.forEach((slot, index) => {
-		gear[index] = { slot, icon: data.gear[slot] };
+		gear[index] = { slot, glamIcon: data.glams[slot] };
 	});
 
 	return (
@@ -41,13 +41,13 @@ export default function equipment({ data }) {
 						image : data.character.Avatar
 					},
 					{
-						link    : `/../character/${data.character.ID}/equipment`,
-						label   : 'Equipment',
-						current : true
+						link  : `/../character/${data.character.ID}/equipment`,
+						label : 'Equipment'
 					},
 					{
-						link  : `/../character/${data.character.ID}/glamours`,
-						label : 'Glamours'
+						link    : `/../character/${data.character.ID}/glamours`,
+						label   : 'Glamours',
+						current : true
 					}
 				]}
 			/>
@@ -80,8 +80,8 @@ export default function equipment({ data }) {
 							className='relative w-10 h-10'
 							style={{ gridColumnStart: col, gridRowStart: row }}
 						>
-							{item.icon ? (
-								<Image alt={`gear ${item.slot} icon`} src={item.icon} layout='fill' />
+							{item.glamIcon ? (
+								<Image alt={`gear ${item.slot} icon`} src={item.glamIcon} layout='fill' />
 							) : (
 								<div />
 							)}
@@ -108,25 +108,28 @@ export async function getServerSideProps(context) {
 		}
 		default:
 			const gearSlots = Object.keys(dataChar.Character.GearSet.Gear);
-			const gear = {};
+			const glams = {};
 
 			for (const slot in gearSlots) {
-				const resItem = await fetch(
-					`https://xivapi.com/Item/${dataChar.Character.GearSet.Gear[gearSlots[slot]]
-						.ID}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
-				);
-				const dataItem = await resItem.json();
-				const itemIcon = 'https://xivapi.com' + dataItem.Icon;
+				let glamIcon = null;
 
-				const itemSlotKey = gearSlots[slot];
-				gear[itemSlotKey] = itemIcon;
+				if (dataChar.Character.GearSet.Gear[gearSlots[slot]].Mirage) {
+					const resGlam = await fetch(
+						`https://xivapi.com/Item/${dataChar.Character.GearSet.Gear[gearSlots[slot]]
+							.Mirage}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
+					);
+					const dataGlam = await resGlam.json();
+					glamIcon = 'https://xivapi.com' + dataGlam.Icon;
+				}
+				const glamSlotKey = gearSlots[slot];
+				glams[glamSlotKey] = glamIcon;
 			}
 
 			return {
 				props : {
 					data : {
 						character : dataChar.Character,
-						gear
+						glams
 					}
 				}
 			};

@@ -16,8 +16,8 @@ export default function Home({ data }) {
 			</Head>
 			<Nav
 				linkList={[
-					{ link: `./${data.FreeCompany.ID}`, label: `${data.FreeCompany.Tag}`, current: true },
-					{ link: `${data.FreeCompany.ID}/members`, label: 'Members', current: false }
+					{ link: `/freecompany/${data.FreeCompany.ID}`, label: `${data.FreeCompany.Tag}`, current: true },
+					{ link: `/freecompany/${data.FreeCompany.ID}/members`, label: 'Members', current: false }
 				]}
 			/>
 			<CompanyHeader
@@ -26,23 +26,29 @@ export default function Home({ data }) {
 				server={data.FreeCompany.Server}
 				dataCenter={data.FreeCompany.DC}
 				id={data.FreeCompany.ID}
-				href={`../freecompany/${data.FreeCompany.ID}`}
+				href={`/../freecompany/${data.FreeCompany.ID}`}
 			/>
-			{data.FreeCompany.GrandCompany ? <h4 className='text-center'>{data.FreeCompany.GrandCompany}</h4> : <div />}
-			<div className='p-5 bg-purple-200 italic rounded-2xl mt-5 max-w-lg mx-auto'>
+			{data.FreeCompany.GrandCompany ? (
+				<h4 className='text-center font-medula text-xl font-bold text-yellow-700'>
+					The {data.FreeCompany.GrandCompany}
+				</h4>
+			) : (
+				<div />
+			)}
+			<div className='p-5 bg-yellow-200 bg-opacity-70 italic rounded-2xl mt-5 max-w-lg mx-auto'>
 				<p>{data.FreeCompany.Slogan}</p>
 			</div>
-			<div className='grid grid-cols-1 md:grid-cols-3 gap-5 p-10 place-items-center max-w-4xl m-auto'>
+			<div className='grid grid-cols-1 sm:grid-cols-3 gap-5 p-5 place-items-center w-64 sm:w-auto sm:max-w-2xl bg-gray-600 rounded-lg border-2 border-yellow-400 border-solid my-10 mx-auto'>
 				{data.FreeCompany.Focus.map((focus) => {
 					return (
 						<div key={focus.Name} className='flex justify-between w-40'>
 							<Image alt='focus icon' width='24' height='16' src={focus.Icon} />
-							<label>{focus.Name}</label>
+							<label className='text-white font-roboto'>{focus.Name}</label>
 							<div className=''>
 								{focus.Status ? (
-									<FontAwesomeIcon icon={faCheck} className='text-green-700' />
+									<FontAwesomeIcon icon={faCheck} className='text-green-500' />
 								) : (
-									<FontAwesomeIcon icon={faTimes} className='text-red-700' />
+									<FontAwesomeIcon icon={faTimes} className='text-red-500' />
 								)}
 							</div>
 						</div>
@@ -50,18 +56,18 @@ export default function Home({ data }) {
 				})}
 			</div>
 			{data.FreeCompany.Recruitment === 'Open' ? (
-				<div className='grid grid-cols-3 gap-5 p-10 place-items-center max-w-2xl m-auto'>
-					<h4 className='text-center'>Recruitment:</h4>
-					<div className='grid col-span-2 grid-cols-2 md:grid-cols-5 gap-5 p-3 place-items-center max-w-2xl m-auto'>
+				<div>
+					<h4 className='text-center font-roboto font-bold'>Recruitment</h4>
+					<div className='grid grid-rows-3 grid-flow-col sm:grid-rows-1 sm:grid-flow-row sm:grid-cols-5 gap-1 p-3 w-48 sm:w-auto place-items-center max-w-md m-auto bg-gray-600 rounded-lg border-2 border-yellow-400 border-solid mt-2'>
 						{data.FreeCompany.Seeking.map((role) => {
 							return (
-								<div key={role.Name} className='flex justify-center w-40'>
+								<div key={role.Name} className='flex justify-center w-20 my-1'>
 									<Image alt='role icon' width='24' height='16' src={role.Icon} />
-									<div className='px-3'>
+									<div className='px-2'>
 										{role.Status ? (
-											<FontAwesomeIcon icon={faCheck} className='text-green-700' />
+											<FontAwesomeIcon icon={faCheck} className='text-green-500' />
 										) : (
-											<FontAwesomeIcon icon={faTimes} className='text-red-700' />
+											<FontAwesomeIcon icon={faTimes} className='text-red-500' />
 										)}
 									</div>
 								</div>
@@ -77,7 +83,10 @@ export default function Home({ data }) {
 }
 
 export const getServerSideProps = async (context) => {
-	const res = await fetch(`https://xivapi.com/freecompany/${context.params.id}`);
+	const res = await fetch(
+		`https://xivapi.com/freecompany/${context.params
+			.id}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
+	);
 	const data = await res.json();
 
 	switch (data.Error) {

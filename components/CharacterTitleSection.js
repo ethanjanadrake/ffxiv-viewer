@@ -24,10 +24,10 @@ export default function CharacterTitleSection(props) {
 			</div>
 			{props.freeCompanyId ? (
 				<div className='col-start-1 row-start-2 md:row-start-1 md:col-start-1 h-full flex flex-col justify-end'>
-					<Link href={`../freecompany/${props.freeCompanyId}`}>
+					<Link href={`/../freecompany/${props.freeCompanyId}`}>
 						<a>
 							<div className='transition-all bg-purple-200 bg-opacity-75 rounded-2xl flex justify-center items-center hover:bg-blue-200 hover:bg-opacity-100 p-5 h-24 relative w-56'>
-								<label className='text-3xl font-medium font-medula text-center'>
+								<label className='text-3xl font-medium font-medula text-center hover:cursor-pointer'>
 									{props.freeCompanyName}
 								</label>
 							</div>
@@ -40,10 +40,10 @@ export default function CharacterTitleSection(props) {
 
 			{props.grandCompany.name ? (
 				<div className='col-start-1 row-start-3 md:row-start-1 md:col-start-3 h-full flex flex-col justify-end'>
-					<Link href={`../${props.grandCompany.name.split(' ').join('')}`}>
+					<Link href={`/../${props.grandCompany.name.split(' ').join('')}`}>
 						<a>
 							<div className='transition-all bg-purple-200 bg-opacity-75 rounded-2xl flex justify-center items-center hover:bg-blue-200 hover:bg-opacity-100 p-5 h-24 relative w-56'>
-								<label className='text-3xl font-medium font-medula text-center'>
+								<label className='text-3xl font-medium font-medula text-center hover:cursor-pointer'>
 									{props.grandCompany.name}
 								</label>
 								<div className='absolute' style={{ top: '-50px', right: '-50px' }}>

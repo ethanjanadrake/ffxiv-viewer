@@ -1,3 +1,53 @@
 .Avatar {
 	grid-row: span 7;
 }
+
+.Col1 {
+	grid-column-start: 1;
+}
+.Col2 {
+	grid-column-start: 1;
+}
+.Col4 {
+	grid-column-start: 1;
+}
+.PortraitSection {
+	grid-column-start: 1;
+	grid-row-start: 1;
+	margin: auto;
+	padding-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+	.Col1 {
+		grid-column-start: 2;
+	}
+	.Col2 {
+		grid-column-start: 1;
+	}
+	.Col4 {
+		grid-column-start: 2;
+	}
+	.PortraitSection {
+		grid-column-start: 1;
+		grid-row: 1 / 10;
+		margin: 0;
+	}
+}
+
+@media (min-width: 1280px) {
+	.Col1 {
+		grid-column-start: 1;
+	}
+	.Col2 {
+		grid-column-start: 2;
+	}
+	.Col4 {
+		grid-column-start: 4;
+	}
+	.PortraitSection {
+		grid-column-start: 3;
+		grid-row: 1 / 15;
+		margin: 0;
+	}
+}
