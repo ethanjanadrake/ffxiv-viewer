@@ -16,7 +16,7 @@ export default function Layout({ children }) {
 			</Head>
 			<div
 				className={
-					'absolute left-0 right-0 bg-background-image-small md:bg-background-image bg-fixed bg-cover ' +
+					'absolute left-0 right-0 bg-background-image-small md:bg-background-image bg-fixed lg:bg-cover  ' +
 					styles.Wrapper
 				}
 			>

@@ -81,7 +81,7 @@ export default function CharacterClassSection(props) {
 									<label className={'px-1 text-3xl font-medula ' + levelColor}>{job.Level}</label>
 								</div>
 								<div>
-									<label className='font-roboto text-white'>{job.UnlockedState.Name}</label>
+									<label className='font-roboto text-primary-t'>{job.UnlockedState.Name}</label>
 									<div className='h-1 relative w-20 mb-1 overflow-hidden'>
 										<div className='w-full h-full bg-gray-500' />
 										<div className='h-full bg-gray-300' style={{ width: progress }} />
@@ -94,7 +94,7 @@ export default function CharacterClassSection(props) {
 									<div className='w-6 h-6 relative'>
 										<Image alt={job.roleLabel} src={job.icon} layout='fill' />
 									</div>
-									<label className='pl-1 font-roboto text-gray-300'>{job.roleLabel}</label>
+									<label className='pl-1 font-roboto text-primary-t-fade'>{job.roleLabel}</label>
 								</div>
 								<hr size='5' width='90%' className='ml-2 text-gray-700' />
 								<hr size='5' width='90%' className='ml-2 text-gray-500 pb-1' />
@@ -104,12 +104,12 @@ export default function CharacterClassSection(props) {
 				);
 			})}
 			<div className={'w-11/12 ' + styles.PortraitSection}>
-				<p className='text-center font-medula text-xl text-gray-300'>
+				<p className='text-center font-medula text-xl text-primary-t-fade'>
 					{props.tribe} {props.race}
 				</p>
-				<p className='text-center font-medula text-2xl text-yellow-300'>{props.currentClass}</p>
+				<p className='text-center font-medula text-2xl text-primary'>{props.currentClass}</p>
 				<div
-					className='relative mx-auto my-2 border-2 border-gray-400 rounded-lg'
+					className='relative mx-auto my-2 border-2 border-primary-t-fade rounded-lg'
 					style={{ width: '160px', height: '218px' }}
 				>
 					<Image
@@ -120,12 +120,12 @@ export default function CharacterClassSection(props) {
 						className='rounded-lg'
 					/>
 				</div>
-				<p className='text-center font-medula text-sm text-gray-300'>Nameday: {props.nameday}</p>
+				<p className='text-center font-medula text-sm text-primary-t-fade'>Nameday: {props.nameday}</p>
 				<div className='flex items-center justify-center py-2'>
 					<div className='w-5 h-5 relative mr-2'>
 						<Image alt='guardian deity icon' src={`https://xivapi.com${props.deityIcon}`} layout='fill' />
 					</div>
-					<p className='text-center font-medula text-xl text-gray-300'>{props.deity}</p>
+					<p className='text-center font-medula text-xl text-primary-t-fade'>{props.deity}</p>
 					<div className='w-5 h-5 relative ml-2'>
 						<Image alt='guardian deity icon' src={`https://xivapi.com${props.deityIcon}`} layout='fill' />
 					</div>

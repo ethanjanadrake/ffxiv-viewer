@@ -3,6 +3,10 @@
 	--navHeight: 60px;
 }
 
+.NavHeight {
+	height: var(--navHeight);
+}
+
 .MainStyle {
 	min-height: calc(100vh - var(--navHeight));
 }
@@ -14,19 +18,31 @@
 .NavbarStyle ul {
 	flex-direction: column;
 	left: -100vw;
+	top: 60px;
 }
 
 .NavbarStyle .NavActive {
 	left: 0;
 }
 
+.NavOverlay {
+	top: var(--navHeight);
+}
+
+.AdvancedBarLocation {
+	top: var(--navHeight);
+}
+
+.DCLocation {
+	top: calc(var(--navHeight) * 2);
+}
+.ServerLocation {
+	top: calc(var(--navHeight) * 3);
+}
+
 .Wrapper {
 	top: var(--navHeight);
 	background-position: center var(--navHeight);
-}
-
-.NavImageLabelCouple:hover .NavImage {
-	border: white solid 2px;
 }
 
 .NavImage {
@@ -48,8 +64,5 @@
 	.NavbarStyle ul {
 		height: var(--navHeight);
 		flex-direction: row;
-	}
-	.NavbarStyle button {
-		display: none;
 	}
 }
