@@ -7,10 +7,10 @@ export default function Home() {
 	return (
 		<div>
 			<Head>
-				<title>Lodestone 2.0</title>
+				<title>FFXIV Viewer</title>
 			</Head>
 			<Nav linkList={[]} current={true} />
-			<h1 className='text-center pt-20'>Lodestone 2.0</h1>
+			<h1 className='text-center pt-20'>FFXIV Viewer</h1>
 			<Link href='freecompany/9231112598714358365'>
 				<a>
 					<h1>Blitz</h1>

@@ -56,7 +56,10 @@ export default function Paginator(props) {
 			}
 			else {
 				pageLinks.push(
-					<Link key={i} href={`/search?s=${props.searchQuery}&p=${i}`}>
+					<Link
+						key={i}
+						href={`/search?s=${props.searchQuery}&p=${i}&server=${props.serverName}&type=${props.type}`}
+					>
 						<a className='transition-all p-1 font-bold text-secondary hover:text-primary-dark'>{i}</a>
 					</Link>
 				);
@@ -76,6 +79,8 @@ export default function Paginator(props) {
 						className='p-1 m-1'
 					/>
 					<input type='hidden' name='s' value={props.searchQuery} />
+					<input type='hidden' name='server' value={props.serverName} />
+					<input type='hidden' name='type' value={props.type} />
 					<button
 						type='submit'
 						className='transition-all bg-primary-t hover:bg-primary-b text-secondary hover:text-primary font-bold p-1 m-1 rounded-md'
@@ -94,7 +99,10 @@ export default function Paginator(props) {
 			) : (
 				<div className='flex p-1 justify-center'>
 					{props.pagination.PagePrev ? (
-						<Link href={`/search?s=${props.searchQuery}&p=${props.pagination.PagePrev}`}>
+						<Link
+							href={`/search?s=${props.searchQuery}&p=${props.pagination
+								.PagePrev}&server=${props.serverName}&type=${props.type}`}
+						>
 							<a className='transition-all p-1 font-bold text-secondary hover:text-primary-dark'>&lt;</a>
 						</Link>
 					) : (
@@ -102,7 +110,10 @@ export default function Paginator(props) {
 					)}
 					{pageLinks}
 					{props.pagination.PageNext ? (
-						<Link href={`/search?s=${props.searchQuery}&p=${props.pagination.PageNext}`}>
+						<Link
+							href={`/search?s=${props.searchQuery}&p=${props.pagination
+								.PageNext}&server=${props.serverName}&type=${props.type}`}
+						>
 							<a className='transition-all p-1 font-bold text-secondary hover:text-primary-dark'>&gt;</a>
 						</Link>
 					) : (

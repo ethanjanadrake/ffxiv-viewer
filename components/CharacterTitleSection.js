@@ -40,7 +40,7 @@ export default function CharacterTitleSection(props) {
 
 			{props.grandCompany.name ? (
 				<div className='col-start-1 row-start-3 md:row-start-1 md:col-start-3 h-full flex flex-col justify-end'>
-					<Link href={`/../grandcompany/${props.grandCompany.name.split(' ').join('')}`}>
+					<Link href={`https://ffxiv.gamerescape.com/wiki/${props.grandCompany.name.split(' ').join('_')}`}>
 						<a>
 							<div className='transition-all bg-secondary-b bg-opacity-75 rounded-2xl flex justify-center items-center text-secondary-t hover:text-primary-t hover:bg-primary-b hover:bg-opacity-100 p-5 h-24 relative w-56'>
 								<label className='text-3xl font-medium font-medula text-center hover:cursor-pointer'>

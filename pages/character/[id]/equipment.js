@@ -1,37 +1,14 @@
-import Image from 'next/image';
+import Head from 'next/head';
 import Nav from '../../../components/Nav';
 import CharacterTitleSection from '../../../components/CharacterTitleSection';
-import styles from '../../../styles/character.module.css';
+import EquipmentGrid from '../../../components/EquipmentGrid';
 
 export default function equipment({ data }) {
-	console.log(data);
-
-	// data does not include offhand
-	const gearSlots = [
-		'Head',
-		'Body',
-		'Hands',
-		'Waist',
-		'Legs',
-		'Feet',
-		'MainHand',
-		'OffHand',
-		'Earrings',
-		'Necklace',
-		'Bracelets',
-		'Ring1',
-		'Ring2',
-		'SoulCrystal'
-	];
-
-	const gear = [];
-
-	gearSlots.forEach((slot, index) => {
-		gear[index] = { slot, icon: data.gear[slot] };
-	});
-
 	return (
 		<div>
+			<Head>
+				<title>{data.character.Name} - Equipment</title>
+			</Head>
 			{/* Display the Navbar with Home button as well as portrait and name of character which links to the current page */}
 			<Nav
 				linkList={[
@@ -59,36 +36,7 @@ export default function equipment({ data }) {
 				server={data.character.Server}
 				grandCompany={{}}
 			/>
-
-			<div className='grid grid-cols-3 place-items-center'>
-				<div className={'col-start-2 ' + styles.Avatar}>
-					<Image alt='player avatar' src={data.character.Portrait} width='640px' height='873px' />
-				</div>
-
-				{gear.map((item, index) => {
-					let col = 1;
-					let row = index + 1;
-
-					if (index > 6) {
-						col = 3;
-						row = row - 7;
-					}
-
-					return (
-						<div
-							key={index}
-							className='relative w-10 h-10'
-							style={{ gridColumnStart: col, gridRowStart: row }}
-						>
-							{item.icon ? (
-								<Image alt={`gear ${item.slot} icon`} src={item.icon} layout='fill' />
-							) : (
-								<div />
-							)}
-						</div>
-					);
-				})}
-			</div>
+			<EquipmentGrid portrait={data.character.Portrait} gear={data.gear} />
 		</div>
 	);
 }
@@ -116,10 +64,9 @@ export async function getServerSideProps(context) {
 						.ID}?private_key=76c22de8f16d417895cb6832dfa2928f36c49486b6634ea081d5c5e308c00dc1`
 				);
 				const dataItem = await resItem.json();
-				const itemIcon = 'https://xivapi.com' + dataItem.Icon;
 
 				const itemSlotKey = gearSlots[slot];
-				gear[itemSlotKey] = itemIcon;
+				gear[itemSlotKey] = dataItem;
 			}
 
 			return {

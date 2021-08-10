@@ -1,12 +1,14 @@
+import Head from 'next/head';
 import Nav from '../../../components/Nav';
 import CharacterTitleSection from '../../../components/CharacterTitleSection';
 import CharacterClassSection from '../../../components/CharacterClassSection';
 
 export default function character({ data }) {
-	console.log(data);
-
 	return (
 		<div>
+			<Head>
+				<title>{data.character.Name}</title>
+			</Head>
 			{/* Display the Navbar with Home button as well as portrait and name of character which links to the current page */}
 			<Nav
 				linkList={[

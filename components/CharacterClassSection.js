@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import styles from '../styles/character.module.css';
 
 export default function CharacterClassSection(props) {
 	const classArray = [];
@@ -68,10 +67,8 @@ export default function CharacterClassSection(props) {
 					opacity = 'opacity-40';
 				}
 
-				const colString = 'Col' + col;
-
 				return (
-					<div key={job.icon} className={'w-48 mx-auto ' + opacity + ' ' + styles[colString]}>
+					<div key={job.icon} className={'w-48 mx-auto ' + opacity} style={{ gridColumnStart: col }}>
 						{job.JobID ? (
 							<div className='flex items-center justify-between mx-4 p-1'>
 								<div className='flex items-center'>
@@ -103,7 +100,7 @@ export default function CharacterClassSection(props) {
 					</div>
 				);
 			})}
-			<div className={'w-11/12 ' + styles.PortraitSection}>
+			<div className='w-11/12' style={{ gridColumnStart: '3', gridRow: '1/14' }}>
 				<p className='text-center font-medula text-xl text-primary-t-fade'>
 					{props.tribe} {props.race}
 				</p>

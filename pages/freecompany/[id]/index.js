@@ -7,8 +7,6 @@ import Nav from '../../../components/Nav';
 import CompanyHeader from '../../../components/CompanyHeader';
 
 export default function Home({ data }) {
-	console.log(data);
-
 	return (
 		<div>
 			<Head>

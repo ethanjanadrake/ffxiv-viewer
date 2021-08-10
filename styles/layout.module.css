@@ -6,6 +6,9 @@
 .NavHeight {
 	height: var(--navHeight);
 }
+.NavHeight2 {
+	height: calc(var(--navHeight) * 2);
+}
 
 .MainStyle {
 	min-height: calc(100vh - var(--navHeight));
@@ -33,11 +36,15 @@
 	top: var(--navHeight);
 }
 
+.NegativeLocation {
+	top: calc(var(--navHeight) * -1);
+}
+
 .DCLocation {
-	top: calc(var(--navHeight) * 2);
+	top: calc(var(--navHeight) * 3);
 }
 .ServerLocation {
-	top: calc(var(--navHeight) * 3);
+	top: calc(var(--navHeight) * 4);
 }
 
 .Wrapper {

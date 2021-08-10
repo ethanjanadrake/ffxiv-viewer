@@ -4,7 +4,6 @@ import Nav from '../../../components/Nav';
 import LinkGrid from '../../../components/LinkGrid';
 
 export default function members({ data }) {
-	console.log(data);
 	return (
 		<div>
 			<Head>
@@ -28,7 +27,7 @@ export default function members({ data }) {
 				id={data.FreeCompany.ID}
 				href={`/../freecompany/${data.FreeCompany.ID}`}
 			/>
-			<LinkGrid characters={data.FreeCompanyMembers} />
+			<LinkGrid results={data.FreeCompanyMembers} type='character' origin='fc' />
 		</div>
 	);
 }

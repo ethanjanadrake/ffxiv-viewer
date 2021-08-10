@@ -4,6 +4,7 @@ import styles from '../styles/layout.module.css';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { servers } from '../data/data';
 
 export default function Nav(props) {
 	const [
@@ -36,140 +37,14 @@ export default function Nav(props) {
 		setDataCenterState
 	] = useState('');
 
-	const servers = [
-		{
-			name        : 'Japan',
-			dataCenters : [
-				{
-					name        : 'Elemental',
-					serverNames : [
-						'Aegis',
-						'Atomos',
-						'Carbuncle',
-						'Garuda',
-						'Gungnir',
-						'Kujata',
-						'Ramuh',
-						'Tonberry',
-						'Typhon',
-						'Unicorn'
-					]
-				},
-				{
-					name        : 'Gaia',
-					serverNames : [
-						'Alexander',
-						'Bahamut',
-						'Durandal',
-						'Fenrir',
-						'Ifrit',
-						'Ridill',
-						'Tiamat',
-						'Ultima',
-						'Valefor',
-						'Yojimbo',
-						'Zeromus'
-					]
-				},
-				{
-					name        : 'Mana',
-					serverNames : [
-						'Anima',
-						'Asura',
-						'Belias',
-						'Chocobo',
-						'Hades',
-						'Ixion',
-						'Mandragora',
-						'Masamune',
-						'Pandaemonium',
-						'Shinryu',
-						'Titan'
-					]
-				}
-			]
-		},
-		{
-			name        : 'North America',
-			dataCenters : [
-				{
-					name        : 'Aether',
-					serverNames : [
-						'Adamantoise',
-						'Cactuar',
-						'Faerie',
-						'Gilgamesh',
-						'Jenova',
-						'Midgardsormr',
-						'Sargatanas',
-						'Siren'
-					]
-				},
-				{
-					name        : 'Primal',
-					serverNames : [
-						'Behemoth',
-						'Excalibur',
-						'Exodus',
-						'Famfrit',
-						'Hyperion',
-						'Lamia',
-						'Leviathan',
-						'Ultros'
-					]
-				},
-				{
-					name        : 'Crystal',
-					serverNames : [
-						'Balmung',
-						'Brynhildr',
-						'Coeurl',
-						'Diabolos',
-						'Goblin',
-						'Malboro',
-						'Mateus',
-						'Zalera'
-					]
-				}
-			]
-		},
-		{
-			name        : 'Europe',
-			dataCenters : [
-				{
-					name        : 'Chaos',
-					serverNames : [
-						'Cerberus',
-						'Louisoix',
-						'Moogle',
-						'Omega',
-						'Ragnarok',
-						'Spriggan'
-					]
-				},
-				{
-					name        : 'Light',
-					serverNames : [
-						'Lich',
-						'Odin',
-						'Phoenix',
-						'Shiva',
-						'Twintania',
-						'Zodiark'
-					]
-				}
-			]
-		}
-	];
-
 	return (
 		<div>
 			<div
 				className={
 					'transition-all font-roboto z-30 fixed w-screen left-0 bg-primary-b text-primary-t ' +
-					(advanced ? styles.AdvancedBarLocation : 'top-0') +
+					(advanced ? styles.AdvancedBarLocation : styles.NegativeLocation) +
 					' ' +
-					styles.NavHeight
+					styles.NavHeight2
 				}
 			>
 				<div className='grid grid-flow-col mx-3 items-center h-1/2 gap-2'>
@@ -178,7 +53,7 @@ export default function Nav(props) {
 							setTypeFilter('character');
 						}}
 						className={
-							'transition-all rounded-md h-full w-full hover:bg-primary-t hover:text-primary-b ' +
+							'transition-all rounded-md h-3/4 p-2 hover:bg-primary-t hover:text-primary-b ' +
 							(typeFilter === 'character'
 								? 'bg-primary text-primary-b hover:bg-primary hover:text-primary-b'
 								: '')
@@ -191,7 +66,7 @@ export default function Nav(props) {
 							setTypeFilter('freecompany');
 						}}
 						className={
-							'transition-all rounded-md h-full w-full hover:bg-primary-t hover:text-primary-b ' +
+							'transition-all rounded-md h-3/4 hover:bg-primary-t hover:text-primary-b ' +
 							(typeFilter === 'freecompany'
 								? 'bg-primary text-primary-b hover:bg-primary hover:text-primary-b'
 								: '')
@@ -203,7 +78,7 @@ export default function Nav(props) {
 						onClick={() => {
 							setAdvanced(false);
 						}}
-						className={'transition-all rounded-md h-full w-full hover:bg-primary-t hover:text-primary-b'}
+						className={'transition-all rounded-md h-3/4 hover:bg-primary-t hover:text-primary-b'}
 					>
 						X
 					</button>
@@ -224,7 +99,7 @@ export default function Nav(props) {
 									setServerState('None');
 								}}
 								className={
-									'transition-all rounded-md h-full w-full hover:bg-primary-t hover:text-primary-b ' +
+									'transition-all rounded-md h-3/4 p-2 w-full hover:bg-primary-t hover:text-primary-b ' +
 									(regionState === region.name ? 'bg-primary-t text-primary-b' : '')
 								}
 							>
@@ -259,7 +134,7 @@ export default function Nav(props) {
 										setServerState('None');
 									}}
 									className={
-										'transition-all rounded-md h-full w-full hover:bg-primary-t hover:text-primary-b ' +
+										'transition-all rounded-md h-3/4 p-2 w-full hover:bg-primary-t hover:text-primary-b ' +
 										(dataCenterState === dataCenter.name ? 'bg-primary-t text-primary-b' : '') +
 										(regionState === region.name ? '' : 'hidden')
 									}
@@ -284,7 +159,7 @@ export default function Nav(props) {
 					styles.NavHeight
 				}
 			>
-				<div className='grid grid-flow-col items-center h-full gap-2'>
+				<div className='grid grid-flow-col items-center h-full gap-2 overflow-scroll'>
 					{servers.map((region) => {
 						return region.dataCenters.map((dataCenter) => {
 							return dataCenter.serverNames.map((serverName) => {
@@ -300,9 +175,9 @@ export default function Nav(props) {
 											}
 										}}
 										className={
-											'transition-all rounded-md h-full w-full hover:bg-primary-t hover:text-primary-b ' +
+											'transition-all rounded-md h-3/4 w-full p-2 hover:bg-primary-t hover:text-primary-b ' +
 											(serverState === serverName
-												? 'bg-primary text-primary-b hover:bg-primary-t hover:text-primary-b'
+												? 'bg-primary text-primary-b hover:bg-primary sm:hover:primary-t hover:text-primary-b'
 												: '') +
 											(dataCenterState === dataCenter.name ? '' : 'hidden')
 										}
