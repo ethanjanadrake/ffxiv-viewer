@@ -1,16 +1,18 @@
 import Nav from '../components/Nav';
+import Head from 'next/head';
 import LinkGrid from '../components/LinkGrid';
 import Paginator from '../components/Paginator';
 
-export default function search({ data, s }) {
-	console.log(data);
-
+export default function search({ data, s, serverName, searchType }) {
 	return (
 		<div>
+			<Head>
+				<title>FFXIV - Search</title>
+			</Head>
 			<Nav linkList={[]} />
-			<Paginator pagination={data.Pagination} searchQuery={s} />
-			<LinkGrid characters={data.Results} />
-			<Paginator pagination={data.Pagination} searchQuery={s} />
+			<Paginator pagination={data.Pagination} serverName={serverName} type={searchType} searchQuery={s} />
+			<LinkGrid results={data.Results} type={searchType} />
+			<Paginator pagination={data.Pagination} serverName={serverName} type={searchType} searchQuery={s} />
 		</div>
 	);
 }
@@ -40,7 +42,9 @@ export const getServerSideProps = async ({ query }) => {
 			return {
 				props : {
 					data,
-					s    : query.s
+					s          : query.s,
+					serverName : query.server,
+					searchType : query.type
 				}
 			};
 	}
