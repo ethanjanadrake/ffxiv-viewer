@@ -1,49 +1,74 @@
 import Image from 'next/image';
+import CharacterClassListColumn from './CharacterClassListColumn';
 
 export default function CharacterClassSection(props) {
-	const classArray = [];
+	const classArray1 = [];
+	const classArray2 = [];
+	const classArray3 = [];
 
-	classArray.push({ icon: '/images/Role_Tank.png', roleLabel: 'Tank' });
+	classArray1.push({ icon: '/images/Role_Tank.png', roleLabel: 'Tank' });
 	for (let i = 0; i < 4; i++) {
-		classArray.push(props.classes[i]);
+		classArray1.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/images/Role_Healer.png', roleLabel: 'Healer' });
+	classArray1.push({ icon: '/images/Role_Healer.png', roleLabel: 'Healer' });
 	for (let i = 8; i < 11; i++) {
-		classArray.push(props.classes[i]);
+		classArray1.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/images/Role_Melee_DPS.png', roleLabel: 'Melee DPS' });
+	classArray2.push({ icon: '/images/Role_Melee_DPS.png', roleLabel: 'Melee DPS' });
 	for (let i = 4; i < 8; i++) {
-		classArray.push(props.classes[i]);
+		classArray2.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/images/Role_Physical_Ranged_DPS.png', roleLabel: 'Physical Ranged DPS' });
+	classArray2.push({ icon: '/images/Role_Physical_Ranged_DPS.png', roleLabel: 'Physical Ranged DPS' });
 	for (let i = 11; i < 14; i++) {
-		classArray.push(props.classes[i]);
+		classArray2.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/images/Role_Magical_Ranged_DPS.png', roleLabel: 'Magical Ranged DPS' });
+	classArray2.push({ icon: '/images/Role_Magical_Ranged_DPS.png', roleLabel: 'Magical Ranged DPS' });
 	for (let i = 14; i < 18; i++) {
-		classArray.push(props.classes[i]);
+		classArray2.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/images/Role_Disciples_of_the_Hand.png', roleLabel: 'Disciples of the Hand' });
+	classArray3.push({ icon: '/images/Role_Disciples_of_the_Hand.png', roleLabel: 'Disciples of the Hand' });
 	for (let i = 18; i < 26; i++) {
-		classArray.push(props.classes[i]);
+		classArray3.push(props.classes[i]);
 	}
-	classArray.push({ icon: '/images/Role_Disciples_of_the_Land.png', roleLabel: 'Disciples of the Land' });
+	classArray3.push({ icon: '/images/Role_Disciples_of_the_Land.png', roleLabel: 'Disciples of the Land' });
 	for (let i = 26; i < 29; i++) {
-		classArray.push(props.classes[i]);
+		classArray3.push(props.classes[i]);
 	}
 
-	classArray[22].UnlockedState.Name = 'Blue Mage';
+	classArray2[13].UnlockedState.Name = 'Blue Mage';
 
-	classArray.forEach((classJob) => {
+	classArray1.forEach((classJob) => {
+		if (classJob.JobID) {
+			classJob.icon = '/images/' + classJob.UnlockedState.Name.split(' ').join('_') + '_Icon.png';
+		}
+	});
+	classArray2.forEach((classJob) => {
+		if (classJob.JobID) {
+			classJob.icon = '/images/' + classJob.UnlockedState.Name.split(' ').join('_') + '_Icon.png';
+		}
+	});
+	classArray3.forEach((classJob) => {
 		if (classJob.JobID) {
 			classJob.icon = '/images/' + classJob.UnlockedState.Name.split(' ').join('_') + '_Icon.png';
 		}
 	});
 
 	return (
-		<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 grid-flow-col bg-gray-600 w-9/12 w-64 md:w-8/12 xl:w-9/12 p-3 rounded-lg border-2 border-yellow-400 border-solid mx-auto'>
-			{classArray.map((job, index) => {
+		<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 grid-flow-col bg-gray-600 w-9/12 md:w-8/12 xl:w-9/12 p-3 rounded-lg border-2 border-yellow-400 border-solid mx-auto'>
+			<div className='col-start-1'>
+				<CharacterClassListColumn classArray={classArray1} />
+			</div>
+			<div className='col-start-1 xl:col-start-2'>
+				<CharacterClassListColumn classArray={classArray2} />
+			</div>
+			<div className='col-start-1 md:col-start-2 xl:col-start-4'>
+				<CharacterClassListColumn classArray={classArray3} />
+			</div>
+			{/* {classArray.map((job, index) => {
 				let col = 1;
+				let colMed = 1;
+				let row = index + 1;
+				let rowMed = index + 1;
 				const progress = Math.floor(job.ExpLevel / job.ExpLevelMax * 100) + '%';
 				let levelColor = 'text-white';
 				let opacity = '';
@@ -58,17 +83,25 @@ export default function CharacterClassSection(props) {
 
 				if (index >= 9 && index <= 22) {
 					col = 2;
+					colMed = 1;
+					row = index - 8;
 				}
 				if (index >= 23) {
 					col = 4;
+					colMed = 2;
+					row = index - 22;
 				}
 
 				if (job.Level === 0) {
 					opacity = 'opacity-40';
 				}
 
+				const colString = ' md:col-start-' + colMed.toString() + ' xl:col-start-' + col.toString();
+
+				const rowString = ' md:row-start-' + rowMed.toString() + ' xl:row-start-' + row.toString();
+
 				return (
-					<div key={job.icon} className={'w-48 mx-auto ' + opacity} style={{ gridColumnStart: col }}>
+					<div key={job.icon} className={'w-48 mx-auto col-start-1 ' + opacity + ' ' + colString + rowString}>
 						{job.JobID ? (
 							<div className='flex items-center justify-between mx-4 p-1'>
 								<div className='flex items-center'>
@@ -99,8 +132,8 @@ export default function CharacterClassSection(props) {
 						)}
 					</div>
 				);
-			})}
-			<div className='w-11/12' style={{ gridColumnStart: '3', gridRow: '1/14' }}>
+			})} */}
+			<div className='w-11/12 col-start-1 md:col-start-2 xl:col-start-3 row-start-1 py-5 mx-auto'>
 				<p className='text-center font-medula text-xl text-primary-t-fade'>
 					{props.tribe} {props.race}
 				</p>

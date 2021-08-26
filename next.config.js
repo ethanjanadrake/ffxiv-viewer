@@ -12,5 +12,14 @@ module.exports = {
 	},
 	env             : {
 		navHeight : '60px'
+	},
+	async redirects() {
+		return [
+			{
+				source      : '/',
+				destination : '/freecompany/9231112598714358365',
+				permanent   : true
+			}
+		];
 	}
 };

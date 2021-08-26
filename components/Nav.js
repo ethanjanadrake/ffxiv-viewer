@@ -216,7 +216,7 @@ export default function Nav(props) {
 							(pullout ? styles.NavActive : '')
 						}
 					>
-						<Link href='/' as='/'>
+						<Link href='/freecompany/9231112598714358365' as='/'>
 							<a
 								className={
 									'h-12 sm:h-full w-48 sm:w-auto flex items-center transition-all px-4 ' +

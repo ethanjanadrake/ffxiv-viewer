@@ -33,27 +33,35 @@ export default function Home({ data }) {
 			) : (
 				<div />
 			)}
-			<div className='p-5 bg-secondary-b bg-opacity-70 italic rounded-2xl mt-5 max-w-lg mx-auto'>
-				<p>{data.FreeCompany.Slogan}</p>
-			</div>
-			<div className='grid grid-cols-1 sm:grid-cols-3 gap-5 p-5 place-items-center w-64 sm:w-auto sm:max-w-2xl bg-primary-b rounded-lg border-2 border-primary border-solid my-10 mx-auto'>
-				{data.FreeCompany.Focus.map((focus) => {
-					return (
-						<div key={focus.Name} className='flex justify-between w-40'>
-							<Image alt='focus icon' width='24' height='16' src={focus.Icon} />
-							<label className='text-primary-t font-roboto'>{focus.Name}</label>
-							<div className=''>
-								{focus.Status ? (
-									<FontAwesomeIcon icon={faCheck} className='text-green-500' />
-								) : (
-									<FontAwesomeIcon icon={faTimes} className='text-red-500' />
-								)}
+			{data.FreeCompany.Slogan ? (
+				<div className='p-5 bg-secondary-b bg-opacity-70 italic rounded-2xl mt-5 max-w-lg mx-auto'>
+					<p>{data.FreeCompany.Slogan}</p>
+				</div>
+			) : (
+				<div />
+			)}
+			{data.FreeCompany.Focus[0] ? (
+				<div className='grid grid-cols-1 sm:grid-cols-3 gap-5 p-5 place-items-center w-64 sm:w-auto sm:max-w-2xl bg-primary-b rounded-lg border-2 border-primary border-solid my-10 mx-auto'>
+					{data.FreeCompany.Focus.map((focus) => {
+						return (
+							<div key={focus.Name} className='flex justify-between w-40'>
+								<Image alt='focus icon' width='24' height='16' src={focus.Icon} />
+								<label className='text-primary-t font-roboto'>{focus.Name}</label>
+								<div className=''>
+									{focus.Status ? (
+										<FontAwesomeIcon icon={faCheck} className='text-green-500' />
+									) : (
+										<FontAwesomeIcon icon={faTimes} className='text-red-500' />
+									)}
+								</div>
 							</div>
-						</div>
-					);
-				})}
-			</div>
-			{data.FreeCompany.Recruitment === 'Open' ? (
+						);
+					})}
+				</div>
+			) : (
+				<div />
+			)}
+			{data.FreeCompany.Recruitment === 'Open' && data.FreeCompany.Seeking[0] ? (
 				<div>
 					<h4 className='text-center font-roboto font-bold'>Recruitment</h4>
 					<div className='grid grid-rows-3 grid-flow-col sm:grid-rows-1 sm:grid-flow-row sm:grid-cols-5 gap-1 p-3 w-48 sm:w-auto place-items-center max-w-md m-auto bg-primary-b rounded-lg border-2 border-primary border-solid mt-2'>
@@ -74,7 +82,7 @@ export default function Home({ data }) {
 					</div>
 				</div>
 			) : (
-				<div> {data.FreeCompany.Recruitment}</div>
+				<div />
 			)}
 		</div>
 	);
