@@ -30,7 +30,7 @@ export default function CharacterClassListColumn(props) {
 									<div className='w-8 h-8 relative mr-2'>
 										<Image alt={job.UnlockedState.Name} src={job.icon} layout='fill' />
 									</div>
-									<label className={'mr-2 text-3xl font-medula ' + levelColor}>{job.Level}</label>
+									<label className={'w-4 text-right mr-2 text-3xl font-medula ' + levelColor}>{job.Level}</label>
 								</div>
 								<div>
 									<label className='font-roboto text-primary-t'>{job.UnlockedState.Name}</label>
