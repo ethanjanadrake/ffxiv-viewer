@@ -7,35 +7,35 @@ export default function CharacterClassSection(props) {
 	const classArray3 = [];
 
 	classArray1.push({ icon: '/images/Role_Tank.png', roleLabel: 'Tank' });
-	for (let i = 0; i < 4; i++) {
+	for (let i = 0; i <= 3; i++) {
 		classArray1.push(props.classes[i]);
 	}
 	classArray1.push({ icon: '/images/Role_Healer.png', roleLabel: 'Healer' });
-	for (let i = 8; i < 11; i++) {
+	for (let i = 4; i <= 7; i++) {
 		classArray1.push(props.classes[i]);
 	}
 	classArray2.push({ icon: '/images/Role_Melee_DPS.png', roleLabel: 'Melee DPS' });
-	for (let i = 4; i < 8; i++) {
+	for (let i = 8; i <= 12; i++) {
 		classArray2.push(props.classes[i]);
 	}
 	classArray2.push({ icon: '/images/Role_Physical_Ranged_DPS.png', roleLabel: 'Physical Ranged DPS' });
-	for (let i = 11; i < 14; i++) {
+	for (let i = 13; i <= 15; i++) {
 		classArray2.push(props.classes[i]);
 	}
 	classArray2.push({ icon: '/images/Role_Magical_Ranged_DPS.png', roleLabel: 'Magical Ranged DPS' });
-	for (let i = 14; i < 18; i++) {
+	for (let i = 16; i <= 19; i++) {
 		classArray2.push(props.classes[i]);
 	}
 	classArray3.push({ icon: '/images/Role_Disciples_of_the_Hand.png', roleLabel: 'Disciples of the Hand' });
-	for (let i = 18; i < 26; i++) {
+	for (let i = 28; i <= 30; i++) {
 		classArray3.push(props.classes[i]);
 	}
 	classArray3.push({ icon: '/images/Role_Disciples_of_the_Land.png', roleLabel: 'Disciples of the Land' });
-	for (let i = 26; i < 29; i++) {
+	for (let i = 20; i <= 27; i++) {
 		classArray3.push(props.classes[i]);
 	}
 
-	classArray2[13].UnlockedState.Name = 'Blue Mage';
+	classArray2[14].UnlockedState.Name = 'Blue Mage';
 
 	classArray1.forEach((classJob) => {
 		if (classJob.JobID) {
@@ -54,7 +54,7 @@ export default function CharacterClassSection(props) {
 	});
 
 	return (
-		<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 grid-flow-col bg-gray-600 w-9/12 md:w-8/12 xl:w-9/12 p-3 rounded-lg border-2 border-yellow-400 border-solid mx-auto'>
+		<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 grid-flow-col bg-gray-600 w-9/12 md:w-9/12 xl:w-10/12 p-3 pb-8 rounded-lg border-2 border-yellow-400 border-solid mx-auto'>
 			<div className='col-start-1'>
 				<CharacterClassListColumn classArray={classArray1} />
 			</div>
@@ -64,75 +64,6 @@ export default function CharacterClassSection(props) {
 			<div className='col-start-1 md:col-start-2 xl:col-start-4'>
 				<CharacterClassListColumn classArray={classArray3} />
 			</div>
-			{/* {classArray.map((job, index) => {
-				let col = 1;
-				let colMed = 1;
-				let row = index + 1;
-				let rowMed = index + 1;
-				const progress = Math.floor(job.ExpLevel / job.ExpLevelMax * 100) + '%';
-				let levelColor = 'text-white';
-				let opacity = '';
-
-				if (job.Level === 80) {
-					levelColor = 'text-yellow-400';
-				}
-
-				if (job.JobID === 36 && job.Level === 70) {
-					levelColor = 'text-yellow-400';
-				}
-
-				if (index >= 9 && index <= 22) {
-					col = 2;
-					colMed = 1;
-					row = index - 8;
-				}
-				if (index >= 23) {
-					col = 4;
-					colMed = 2;
-					row = index - 22;
-				}
-
-				if (job.Level === 0) {
-					opacity = 'opacity-40';
-				}
-
-				const colString = ' md:col-start-' + colMed.toString() + ' xl:col-start-' + col.toString();
-
-				const rowString = ' md:row-start-' + rowMed.toString() + ' xl:row-start-' + row.toString();
-
-				return (
-					<div key={job.icon} className={'w-48 mx-auto col-start-1 ' + opacity + ' ' + colString + rowString}>
-						{job.JobID ? (
-							<div className='flex items-center justify-between mx-4 p-1'>
-								<div className='flex items-center'>
-									<div className='w-8 h-8 relative mr-2'>
-										<Image alt={job.UnlockedState.Name} src={job.icon} layout='fill' />
-									</div>
-									<label className={'px-1 text-3xl font-medula ' + levelColor}>{job.Level}</label>
-								</div>
-								<div>
-									<label className='font-roboto text-primary-t'>{job.UnlockedState.Name}</label>
-									<div className='h-1 relative w-20 mb-1 overflow-hidden'>
-										<div className='w-full h-full bg-gray-500' />
-										<div className='h-full bg-gray-300' style={{ width: progress }} />
-									</div>
-								</div>
-							</div>
-						) : (
-							<div>
-								<div className='flex items-center pl-1 pt-1'>
-									<div className='w-6 h-6 relative'>
-										<Image alt={job.roleLabel} src={job.icon} layout='fill' />
-									</div>
-									<label className='pl-1 font-roboto text-primary-t-fade'>{job.roleLabel}</label>
-								</div>
-								<hr size='5' width='90%' className='ml-2 text-gray-700' />
-								<hr size='5' width='90%' className='ml-2 text-gray-500 pb-1' />
-							</div>
-						)}
-					</div>
-				);
-			})} */}
 			<div className='w-11/12 col-start-1 md:col-start-2 xl:col-start-3 row-start-1 py-5 mx-auto'>
 				<p className='text-center font-medula text-xl text-primary-t-fade'>
 					{props.tribe} {props.race}

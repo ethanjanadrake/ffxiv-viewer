@@ -3,10 +3,15 @@ export default function CharacterClassListColumn(props) {
 	return (
 		<div>
 			{props.classArray.map((job) => {
-				const progress = Math.floor(job.ExpLevel / job.ExpLevelMax * 100) + '%';
+				let progress = ''
+				if (job.ExpLevelMax === 0) {
+					progress = '0%'
+				} else {
+					progress = Math.floor(job.ExpLevel / job.ExpLevelMax * 100) + '%';
+				}
 				let levelColor = 'text-white';
 				let opacity = '';
-				if (job.Level === 80) {
+				if (job.Level === 90) {
 					levelColor = 'text-yellow-400';
 				}
 
@@ -18,20 +23,20 @@ export default function CharacterClassListColumn(props) {
 					opacity = 'opacity-40';
 				}
 				return (
-					<div key={job.icon} className={'w-48 mx-auto col-start-1 ' + opacity}>
+					<div key={job.icon} className={'w-11/12 mx-auto col-start-1 ' + opacity}>
 						{job.JobID ? (
-							<div className='flex items-center justify-between mx-4 p-1'>
+							<div className='flex items-center ml-2 p-1'>
 								<div className='flex items-center'>
 									<div className='w-8 h-8 relative mr-2'>
 										<Image alt={job.UnlockedState.Name} src={job.icon} layout='fill' />
 									</div>
-									<label className={'px-1 text-3xl font-medula ' + levelColor}>{job.Level}</label>
+									<label className={'mr-2 text-3xl font-medula ' + levelColor}>{job.Level}</label>
 								</div>
 								<div>
 									<label className='font-roboto text-primary-t'>{job.UnlockedState.Name}</label>
-									<div className='h-1 relative w-20 mb-1 overflow-hidden'>
-										<div className='w-full h-full bg-gray-500' />
-										<div className='h-full bg-gray-300' style={{ width: progress }} />
+									<div className='h-1 relative w-24 mb-1 overflow-hidden'>
+										<div className='absolute w-full h-full bg-gray-500' />
+										<div className='absolute h-full bg-gray-300' style={{ width: progress}} />
 									</div>
 								</div>
 							</div>

@@ -9,7 +9,8 @@ export default function CompanyHeader(props) {
 					<div className='pt-5 sm:pt-20 flex flex-col text-center md:flex-row justify-center items-center'>
 						<div className='relative w-16 h-16 md:mr-5 flex items-center border-2 border-black'>
 							{props.crest.map((crestPiece) => {
-								return <Image alt='crest piece' layout='fill' src={crestPiece} key={crestPiece} />;
+								return
+								<Image alt='crest piece' layout='fill' src={crestPiece} key={crestPiece} />;
 							})}
 						</div>
 

@@ -4,6 +4,25 @@ import CharacterTitleSection from '../../../components/CharacterTitleSection';
 import CharacterClassSection from '../../../components/CharacterClassSection';
 
 export default function character({ data }) {
+	data.character.ClassJobs.forEach(job => {
+		if(!job.ClassID) {
+			if (job.UnlockedState.Name === 'Sage') {
+				job.ClassID = 40
+				job.JobID = 40
+				job.Name = 'sage / sage'
+				job.UnlockedState.ID = 40
+			}
+		}
+		if(!job.ClassID) {
+			if (job.UnlockedState.Name === 'Reaper') {
+				job.ClassID = 39
+				job.JobID = 39
+				job.Name = 'reaper / reaper'
+				job.UnlockedState.ID = 39
+			}
+		}
+	});
+
 	return (
 		<div>
 			<Head>
