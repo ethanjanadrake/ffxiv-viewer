@@ -13,7 +13,7 @@ export default function Layout({ children }) {
 					property='og:description'
 					content='Final Fantasy XIV API viewer.'
 				/>
-				<meta property='og:image' content='/socialimage.jpg' />
+				<meta property='og:image' content='/socialimage.png' />
 				<meta name='author' content='Ethan Jana Drake' />
 				<link rel='preconnect' href='https://fonts.googleapis.com' />
 				<link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin />
